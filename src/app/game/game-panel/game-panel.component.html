@@ -1,0 +1,28 @@
+<div class="game-numbers-panel">
+  <ng-container [ngTemplateOutlet]="numbersRow" *ngFor="let i of rows"
+                [ngTemplateOutletContext]="{start:i}"/>
+  <button type="button" class="randomize-button" (click)="onRandomSelection()">
+    <fa-icon [icon]="faShuffle"/>
+    RND
+  </button>
+  <button type="button" class="clear-button" (click)="onClearSelection()">
+    <fa-icon [icon]="faTrashCan"/>
+    Del
+  </button>
+  <div class="game-numbers-panel-index-container">
+    <div class="game-numbers-panel-index">{{panel.index}}</div>
+  </div>
+</div>
+
+<ng-template #numbersRow let-start="start">
+  <div class="game-numbers-row">
+    <span class="game-number"
+          *ngFor="let number of getRow(start)"
+          [ngClass]="{'selected': isSelected(number)}"
+          (click)="onSelect(number)">
+      {{number}}
+    </span>
+  </div>
+</ng-template>
+
+

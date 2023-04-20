@@ -1,0 +1,11 @@
+<div class="game-panels">
+  <app-game-panel *ngFor="let panel of panels" [panel]="panel"></app-game-panel>
+</div>
+
+<button type="button" mat-button class="game-play-button" color="accent" (click)="onPlay()">Play</button>
+
+<div class="game-summary-container" *ngIf="showSummary">
+  <p *ngFor="let panel of lockedInPanels" [innerHTML]="panel | panelSummary"></p>
+</div>
+
+<button mat-raised-button color="primary" style="margin-top: 40px" (click)="onSignOut()">Sign out</button>

@@ -1,0 +1,99 @@
+@import "src/styles";
+
+.game-numbers-panel {
+  display: flex;
+  flex-direction: column;
+  margin: 25px 8px;
+  position: relative;
+
+  .randomize-button {
+    position: absolute;
+    top: -25px;
+    left: 0;
+  }
+
+  .clear-button {
+    position: absolute;
+    top: -25px;
+    right: 0;
+  }
+
+  button {
+    cursor: pointer;
+    height: 24px;
+    padding: 0 5px;
+    border: none;
+    background: transparent;
+    color: $accent-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      background: #ccc;
+    }
+
+    fa-icon {
+      margin-right: 5px;
+    }
+  }
+
+}
+
+.game-numbers-panel-index {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-numbers-panel-index {
+  font-size: 12em;
+  font-weight: bold;
+  color: rgba(50,20,20,0.3);
+  z-index: -1;
+}
+
+.game-numbers-row {
+  margin: 2px auto;
+  display: flex;
+}
+
+.game-number {
+  cursor: pointer;
+  margin: auto 2px;
+  color: $accent-color;
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  padding: 3px;
+
+  position: relative;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #ccc;
+  }
+
+  &.selected:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "\2715"; /* use the hex value here... */
+    font-size: 23px;
+    color: black;
+    line-height: 22px;
+    text-align: center;
+  }
+}

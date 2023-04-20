@@ -1,0 +1,19 @@
+.game-panels {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+button.mat-accent {
+  display: block;
+  padding: 5px 80px;
+  font-size: 20px;
+  background-color: #cc1111;
+  color: white;
+  margin: auto;
+  border: none;
+}
+
+.game-summary-container {
+  margin-top: 25px;
+}
