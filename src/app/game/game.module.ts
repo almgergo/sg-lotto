@@ -7,7 +7,7 @@ import {GamePageComponent} from './game-page/game-page.component';
 import {GameService} from "@services/game.service";
 import {MatIconModule} from "@angular/material/icon";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {PanelSummaryPipe} from "@pipes/locked-in-panel-pipe";
+import {PanelSummaryPipe} from "@pipes/panel-summary.pipe";
 
 const routes: Routes = [{path: '', component: GamePageComponent}]
 
