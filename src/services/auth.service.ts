@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {User} from "@model/user";
-import {delay, map, of} from "rxjs";
+import {delay, map, Observable, of} from "rxjs";
 import {UserListService} from "@services/user-list.service";
 import {Router} from "@angular/router";
+import {environment} from "../environments/environment";
+import {HttpClient} from "@angular/common/http";
 
 const ACTIVE_USER_KEY = "activeUser"
 
@@ -10,6 +12,8 @@ const ACTIVE_USER_KEY = "activeUser"
   providedIn: 'root'
 })
 export class AuthService {
+  private apiUrl = environment.apiUrl + '/users'
+
   private _user?: User
 
   public get user(): User | undefined {
@@ -22,25 +26,24 @@ export class AuthService {
     else localStorage.setItem(ACTIVE_USER_KEY, JSON.stringify(value))
   }
 
-  constructor(private userListService: UserListService, private router: Router) {
+  constructor(private userListService: UserListService, private router: Router, private http: HttpClient) {
     const storedUserString = localStorage.getItem(ACTIVE_USER_KEY)
     this._user = storedUserString ? JSON.parse(storedUserString) : null
   }
 
-  public signIn(userId: string, password: string) {
-    if (!password || !userId) return of(false)
+  public signIn(userId: string, password: string): Observable<boolean | undefined> {
+    if (!password || !userId) return of(undefined)
 
-    return of({userId, password}).pipe(
-      delay(750),
-      // Find the user on the "BE" and check the password
-      map(({userId: number, password: string}) => {
-        const user = this.userListService.findUser(userId)
-        if (user?.password === password) {
-          this.user = user
-          return true
-        }
-        return false
-      }))
+    return this.http.post<User>(`${this.apiUrl}/${userId}`, {password})
+      .pipe(
+        map((response: User) => {
+          if (response) {
+            this.user = response
+            return true
+          }
+          return false
+        })
+      )
   }
 
   public signOut() {
