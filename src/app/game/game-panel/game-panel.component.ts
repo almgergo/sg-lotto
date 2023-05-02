@@ -16,13 +16,14 @@ export interface Panel {
 export class GamePanelComponent {
   @Input() panel: Panel
 
-  rows = Array.from({length: PLAY_COLUMN_SIZE}, (value, index) => index)
+  rows: number[][]
 
   faTrashCan = faTrashCan
   faShuffle = faShuffle
 
   constructor(private gameService: GameService) {
     this.panel = {index: 0, selection: []}
+    this.rows = Array.from({length: PLAY_COLUMN_SIZE}, (value, index) => this.getRow(index))
   }
 
   onRandomSelection = () => this.panel.selection = this.gameService.randomSelection(6)
